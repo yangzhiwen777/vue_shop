@@ -1,48 +1,66 @@
 <template>
-<div class="home-container">
-<el-container class="home-container">
-  <!-- 头部区域 -->
-  <el-header>
-    <div>
-      <img src="../assets/img/heima.png" alt="">
-      <span>电商后台管理系统</span>
-    </div>
-    <el-button type="info" @click="logout">退出</el-button>
-  </el-header>
-   <!-- 页面主体区域 -->
-  <el-container>
-    <!-- 侧边栏区域 -->
-    <el-aside :width="isCollapse?'64px':'200px'">
-      <div class="toggle-button" @click="toggleCollaase">|||</div>
-      <!-- 侧边栏菜单区域 -->
-      <el-menu :default-active="activePath" :router= "true" :collapse-transition="false" :collapse="isCollapse" :unique-opened="true" background-color="#313743" text-color="#fff" active-text-color="#258bfc">
-      <el-submenu :key="item.id" v-for="item in menulist" :index="item.id+''">
-        <!-- 一级菜单模板区域 -->
-        <template slot="title">
-          <!-- 图标 -->
-          <i :class="iconsObj[item.id]"></i>
-          <!-- 文本 -->
-          <span>{{item.authName}}</span>
-        </template>
-        <!-- 二级菜单 -->
-          <el-menu-item @click="saveNavState('/'+subItem.path)" :index="'/'+subItem.path" :key="subItem.id" v-for="subItem in item.children">
-           <template slot="title">
-          <!-- 图标 -->
-             <i class="el-icon-menu"></i>
-          <!-- 文本 -->
-             <span>{{subItem.authName}}</span>
-           </template>
-          </el-menu-item>
-      </el-submenu>
-    </el-menu>
-    </el-aside>
-    <!-- 右侧主体区域 -->
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </el-container>
-</el-container>
-</div>
+  <div class="home-container">
+    <el-container class="home-container">
+      <!-- 头部区域 -->
+      <el-header>
+        <div>
+          <img src="../assets/img/heima.png" alt="" />
+          <span>电商后台管理系统</span>
+        </div>
+        <el-button type="info" @click="logout">退出</el-button>
+      </el-header>
+      <!-- 页面主体区域 -->
+      <el-container>
+        <!-- 侧边栏区域 -->
+        <el-aside :width="isCollapse ? '64px' : '200px'">
+          <div class="toggle-button" @click="toggleCollaase">|||</div>
+          <!-- 侧边栏菜单区域 -->
+          <el-menu
+            :default-active="activePath"
+            :router="true"
+            :collapse-transition="false"
+            :collapse="isCollapse"
+            :unique-opened="true"
+            background-color="#313743"
+            text-color="#fff"
+            active-text-color="#258bfc"
+          >
+            <el-submenu
+              :key="item.id"
+              v-for="item in menulist"
+              :index="item.id + ''"
+            >
+              <!-- 一级菜单模板区域 -->
+              <template slot="title">
+                <!-- 图标 -->
+                <i :class="iconsObj[item.id]"></i>
+                <!-- 文本 -->
+                <span>{{ item.authName }}</span>
+              </template>
+              <!-- 二级菜单 -->
+              <el-menu-item
+                @click="saveNavState('/' + subItem.path)"
+                :index="'/' + subItem.path"
+                :key="subItem.id"
+                v-for="subItem in item.children"
+              >
+                <template slot="title">
+                  <!-- 图标 -->
+                  <i class="el-icon-menu"></i>
+                  <!-- 文本 -->
+                  <span>{{ subItem.authName }}</span>
+                </template>
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </el-aside>
+        <!-- 右侧主体区域 -->
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -70,7 +88,7 @@ export default {
   },
   methods: {
     // 退出功能
-    logout () {
+    logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
@@ -90,7 +108,6 @@ export default {
       this.activePath = activePath
     }
   }
-
 }
 </script>
 
@@ -115,7 +132,7 @@ export default {
       margin-left: 15px;
     }
   }
-   }
+}
 .el-aside {
   background-color: #313743;
   .el-menu {
@@ -136,7 +153,5 @@ export default {
   line-height: 24px;
   letter-spacing: 0.2em;
   cursor: pointer;
-
 }
-
 </style>
