@@ -1,7 +1,9 @@
 import Vue from 'vue'
-import { Upload, CheckboxGroup, Checkbox, Step, Steps, Tabs, TabPane, Alert, Cascader, Option, Select, Tree, Tag, MessageBox, Dialog, Pagination, Tooltip, Switch, Table, TableColumn, Col, Row, Card, BreadcrumbItem, Breadcrumb, Submenu, Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, MenuItem } from 'element-ui'
+import { Timeline, TimelineItem, Upload, CheckboxGroup, Checkbox, Step, Steps, Tabs, TabPane, Alert, Cascader, Option, Select, Tree, Tag, MessageBox, Dialog, Pagination, Tooltip, Switch, Table, TableColumn, Col, Row, Card, BreadcrumbItem, Breadcrumb, Submenu, Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, MenuItem } from 'element-ui'
 
 Vue.use(Button)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.use(Upload)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
