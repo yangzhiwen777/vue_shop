@@ -11,12 +11,21 @@
       <!-- 第一行 搜索栏区域 -->
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input
+            @clear="getGoodsList"
+            clearable
+            v-model="queryInfo.query"
+            placeholder="请输入内容"
+          >
+            <el-button
+              @click="getGoodsList"
+              slot="append"
+              icon="el-icon-search"
+            ></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加商品</el-button>
+          <el-button @click="goAddpage" type="primary">添加商品</el-button>
         </el-col>
       </el-row>
       <!-- table  表格区域 -->
@@ -43,7 +52,11 @@
             <el-button size="mini" type="primary" icon="el-icon-edit"
               >编辑 {{ scope.row.oooo }}</el-button
             >
-            <el-button size="mini" type="danger" icon="el-icon-delete"
+            <el-button
+              @click="removeById(scope.row.goods_id)"
+              size="mini"
+              type="danger"
+              icon="el-icon-delete"
               >删除</el-button
             >
           </template>
@@ -109,6 +122,34 @@ export default {
     handleCurrentChange(newPage) {
       this.queryInfo.pagenum = newPage
       this.getGoodsList()
+    },
+    // 根据id删除商品 操作
+    async removeById(id) {
+      const confirmResult = await this.$confirm(
+        '此操作将永久删除该商品, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).catch(err => err)
+      // 确认删除   输出'confirm'
+      // 取消删除 输出 'cancel'
+      console.log(confirmResult)
+      if (confirmResult !== 'confirm') {
+        return this.$message.info('已取消删除')
+      }
+      const { data: res } = await this.$http.delete(`goods/${id}`)
+      if (res.meta.status !== 200) {
+        return this.$message.error('删除失败')
+      }
+      this.$message.success('删除成功')
+      this.getGoodsList()
+    },
+    // 点击添加 按钮 路由导航 跳转页面
+    goAddpage() {
+      this.$router.push('/goods/add')
     }
   },
   created() {
