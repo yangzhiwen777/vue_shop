@@ -93,7 +93,7 @@
         >
       </span>
     </el-dialog>
-    //展示物流进度的对话框
+    <!-- //展示物流进度的对话框 -->
     <el-dialog title="物流进度" :visible.sync="progressVisible" width="50%">
       <!-- 时间线 -->
       <el-timeline :reverse="reverse">
